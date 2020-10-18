@@ -52,8 +52,9 @@ def get_directions(cell_idx, points):
 
 
 class Reversi:
-    def __init__(self):
+    def __init__(self, black_hole):
         self.is_finished = False
+        self.black_hole = black_hole
         self.views = []
         self.field = [[' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
                       [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
@@ -127,7 +128,7 @@ class Reversi:
 
         return pieces
 
-    def get_coverage(self, color):
+    def get_coverage_without_black_hole(self, color):
         pieces = self.get_pieces(color)
         coverage = {}
 
@@ -139,6 +140,11 @@ class Reversi:
                 else:
                     coverage[m].append(p)
 
+        return coverage
+
+    def get_coverage(self, color):
+        coverage = self.get_coverage_without_black_hole(color)
+        coverage.pop(self.black_hole)
         return coverage
 
     def flip_row(self, cell_idx, direction):

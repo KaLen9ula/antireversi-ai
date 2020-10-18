@@ -30,21 +30,24 @@ class BotController():
         return random.choice(list(coverage.keys()))
 
 
+class AiController():
+    pass
+
+
+class TestController():
+    pass
+
+
 def prepare():
     player_one = None
     player_two = None
-    while True:
-        print('Choose your opponent (BOT or HUMAN):')
-        inp = input('> ')
-        if inp.lower() == 'bot':
-            player_one = HumanController()
-            player_two = BotController()
-            break
-        elif inp.lower() == 'human':
-            player_one = HumanController()
-            player_two = HumanController()
-            break
-        else:
-            print(f'Unknown command: {inp}')
+    black_hole = convert_to_index(input())
+    ai_color = input()
+    if ai_color == "black":
+        player_one = AiController()
+        player_two = TestController()
+    else:
+        player_one = TestController()
+        player_two - AiController()
 
-    return player_one, player_two
+    return player_one, player_two, black_hole
